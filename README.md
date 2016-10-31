@@ -13,7 +13,7 @@ Current version of WebBox is 0.0.9 (Alpha)
 - [Allow files uploads](#allow-files-uploads)
 - [More Documentation](#need-more-documentation)
 
-### Installing
+## Installing
 Add WebBox to your project with npm:
 
 ```
