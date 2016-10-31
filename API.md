@@ -33,3 +33,19 @@ Starts server at port from arguments.
 | --- | --- | --- |
 | port | Integer | At which port your server should starts. |
 
+###### Example:
+```JavaScript
+server.createServer(3000);
+```
+
+### Server.setServerRoot(\<dir>)
+Sets the root of your server at /dir.
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| dir | String | Path to directory, which will be the root of server |
+
+###### Example:
+```JavaScript
+server.setServerRoot('public/www/');
+```
