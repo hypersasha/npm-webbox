@@ -10,10 +10,10 @@ There is a full list of all classes and methods, which WebBox includes.
   - [Server.sendJSON()](#serversendjsonres-json-status)
   
 ### Class Sql
-  - Sql.Box()
-  - Sql.connect()
-  - Sql.query()
-  - Sql.replyQuery()
+  - [Sql.Box()](#sqlbox)
+  - [Sql.connect()](#sqlconnectuser-pass-database-host)
+  - [Sql.query()](#sqlqueryquery-query_params-callback)
+  - [Sql.replyQuery()](#sqlreplyqueryres-query-query_params)
   
 ### Class VirtualDrive
   - VirtualDrive.Box()
