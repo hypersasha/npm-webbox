@@ -29,7 +29,7 @@ var server = new web.Server.Box();
 server.createServer(3000);
 ```
 
-## Handling a GET/POST-requests
+## Handling GET/POST-requests
 For example, if you want to handle a POST-request, you should use _server.onPost()_ method in your **index.js**
 
 ```JavaScript
