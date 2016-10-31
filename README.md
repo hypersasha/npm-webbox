@@ -39,7 +39,6 @@ server.onPost('/test', function(req,res) {
 ```
 
 ## Creating a server root
-You also can set the root of your server.
 You also can set root of your server. Just make some folder in your project (./www, for example), add an **index.html** file with some markup and then modify your **index.js**
 
 ```JavaScript
