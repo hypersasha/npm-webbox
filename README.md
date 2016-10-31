@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/hypersasha/npm-webbox/master/example/css/imgs/wb_logo.png" width="240"/>
+<img src="https://raw.githubusercontent.com/hypersasha/npm-webbox/master/example/css/imgs/wb_logo.png" width="320"/>
 
 NPM module, which can help you to setup your first NodeJS server, based on Express, MySQL and Multiparty modules.
 
