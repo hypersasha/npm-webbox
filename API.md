@@ -3,11 +3,11 @@ There is a full list of all classes and methods, which WebBox includes.
 
 ### Class Server
   - [Server.Box()](#serverbox)
-  - [Server.createServer()](#servercreateServerport)
-  - [Server.setServerRoot()]()
-  - [Server.onPost()]()
-  - [Server.onGet()]()
-  - [Server.sendJSON()]()
+  - [Server.createServer()](#servercreateserverport)
+  - [Server.setServerRoot()](#serversetserverrootdir)
+  - [Server.onPost()](#serveronpostpath-callback)
+  - [Server.onGet()](#serverongetpath-callback)
+  - [Server.sendJSON()](#serversendjsonres-json-status)
   
 ### Class Sql
   - Sql.Box()
