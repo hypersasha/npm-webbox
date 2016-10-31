@@ -1,7 +1,6 @@
-# WebBox
-NPM module, which can help you to setup your first NodeJS server, based on Express, MySQL and Multiparty modules.
+<img src="https://raw.githubusercontent.com/hypersasha/npm-webbox/master/example/css/imgs/wb_logo.png" width="240"/>
 
-<img src="https://raw.githubusercontent.com/hypersasha/npm-webbox/master/example/css/imgs/wb_logo.png" />
+NPM module, which can help you to setup your first NodeJS server, based on Express, MySQL and Multiparty modules.
 
 ### Version
 Current version of WebBox is 0.0.9 (Alpha)
