@@ -75,5 +75,5 @@ Done! Now you can upload images to your server via POST-requests ar localhost:30
 P.S. WebBox have a JavaScript module, which you can include to your webpage. Find out [here.](https://github.com/hypersasha/js-webbox)
 
 ## Need more documentation?
-You can find the full list of WebBox classes and methods here.
+You can find the full list of WebBox classes and methods [here.](https://github.com/hypersasha/npm-webbox/blob/master/API.md)
 
