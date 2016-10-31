@@ -127,7 +127,7 @@ Returns (Object) result of query.
 | Argument | Type | Description |
 | --- | --- | --- |
 | query | String | SQL-query. |
-| query_params | String | **OPTIONAL.** Parameters, which will be add to query (Read npm mysql documentation). |
+| query_params | Object | **OPTIONAL.** Parameters, which will be add to query (Read npm mysql documentation). |
 | callback | Function | Callback-function. Contains \<result> of query in arguments. |
 
 ###### Example:
@@ -150,3 +150,25 @@ server.onPost('/getUser', function(req, res) {
 {"status":1,"rows":[{"id":1,"uid":1337,"name":"Alexander","lastname":"Witness","age":20}],"fields":[{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"id","orgName":"id","charsetNr":63,"length":2,"type":3,"flags":16899,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"uid","orgName":"uid","charsetNr":63,"length":6,"type":3,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"name","orgName":"name","charsetNr":33,"length":66,"type":253,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"lastname","orgName":"lastname","charsetNr":33,"length":66,"type":253,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"age","orgName":"age","charsetNr":63,"length":2,"type":3,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true}]}
 ```
 Don't panic. (: You can find more info [here.](https://github.com/mysqljs/mysql)
+
+### Sql.replyQuery(\<res>, \<query>, [query_params])
+Similar to Sql.query(), but this method no need for callback. When SQL-query ends, it will automatically send response to client in JSON-format. (via \<res> object).
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| res | Object | Response object. |
+| query | String | SQL-query. |
+| query_params | Object | **OPTIONAL.** Parameters, which will be add to query. |
+
+###### Example:
+```JavaScript
+server.onPost('/getUser', function(req, res) {
+  var query = "SELECT * FROM users WHERE ?";
+  var query_params = {
+    uid: 1337
+  };
+  
+  // Send SQL-query
+  sql.replyQuery(res, query, query_params);
+});
+```
