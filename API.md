@@ -200,7 +200,7 @@ Sets a listener for all upload events, which made via POST-request.
 | url | String | Request url (for example, localhost:3000**/uploadFile** . |
 | dir | String | Where is your will be saved (at drive root). If dir folder doesn't exists, you'll get an error. |
 | props | Object | Some settings for uploading files (see next). |
-| callback | Function | Your callback. Can pass 1 argument \<result>(Object). |
+| callback | Function | Your callback. Can pass 3 arguments \<req>(Request Object), \<res>(Response Object), \<result>(Result Object). |
 
 ###### Example:
 ```JavaScript
@@ -215,9 +215,11 @@ vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
 });
 ```
 
-##### Properties
+##### Avaliable properties
 | Name | Type | Description |
 | --- | --- | --- |
 | maxSize | Integer | Max file size in bytes. |
 | fileTypes | Array | Array of avaliable for upload MIME-types (you can find it [here](http://www.iana.org/assignments/media-types/media-types.xhtml)). |
 | maxNameLength | Integer | Max length of file name, which will be generated. |
+
+
