@@ -16,8 +16,8 @@ There is a full list of all classes and methods, which WebBox includes.
   - [Sql.replyQuery()](#sqlreplyqueryres-query-query_params)
   
 ### Class VirtualDrive
-  - VirtualDrive.Box()
-  - VirtualDrive.onUpload()
+  - [VirtualDrive.Box()](#virtualdriveboxserver-root)
+  - [VirtualDrive.onUpload()](#virtualdriveonuploadurl-dir-props-callback)
 
 ## Server
 This class creates and setup your web-server.
@@ -172,3 +172,52 @@ server.onPost('/getUser', function(req, res) {
   sql.replyQuery(res, query, query_params);
 });
 ```
+
+## VirtualDrive
+This class can help upload files to your server.
+
+### VirtualDrive.Box(\<server>, \<root>)
+Constructor.
+Creates virtual drive at \<root> directory.
+If \<root> folder doesn't exists, it will be automatically created.
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| server | Object | An instance of server class. |
+| root | String | Where is your Virtual Drive root. |
+
+###### Example:
+```JavaScript
+const web = require('webbox');
+var vd = new web.VirtualDrive.Box(server, 'mydrive/');
+```
+
+### VirtualDrive.onUpload(\<url>, \<dir>, \<props>, \<callback>)
+Sets a listener for all upload events, which made via POST-request.
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| url | String | Request url (for example, localhost:3000**/uploadFile** . |
+| dir | String | Where is your will be saved (at drive root). If dir folder doesn't exists, you'll get an error. |
+| props | Object | Some settings for uploading files (see next). |
+| callback | Function | Your callback. Can pass 1 argument \<result>(Object). |
+
+###### Example:
+```JavaScript
+var properties = {
+    maxSize: 5*1024*1024, // 5 MB
+    fileTypes: ['image/jpeg','image/png', 'image/gif','image/bmp'],
+    maxNameLength: 4
+};
+
+vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
+    server.sendJSON(res, result);
+});
+```
+
+##### Properties
+| Name | Type | Description |
+| --- | --- | --- |
+| maxSize | Integer | Max file size in bytes. |
+| fileTypes | Array | Array of avaliable for upload MIME-types (you can find it [here](http://www.iana.org/assignments/media-types/media-types.xhtml)). |
+| maxNameLength | Integer | Max length of file name, which will be generated. |
