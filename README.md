@@ -70,5 +70,6 @@ vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
 });
 ```
 Done! Now you can upload images to your server via POST-requests.
+
 P.S. WebBox have a JavaScript module, which you can include to your webpage. Find out [here.](https://github.com/hypersasha/js-webbox)
 
