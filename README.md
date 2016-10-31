@@ -10,6 +10,7 @@ Current version of WebBox is 0.0.9 (Alpha)
 - [Handling requests](#handling-a-getpost-requests)
 - [Creating a server root](#creating-a-server-root)
 - [Allow files uploads](#allow-files-uploads)
+- [More Documentation](#need-more-documentation)
 
 ### Installing
 Add WebBox to your project with npm:
@@ -69,7 +70,10 @@ vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
     server.sendJSON(res, result);
 });
 ```
-Done! Now you can upload images to your server via POST-requests.
+Done! Now you can upload images to your server via POST-requests ar localhost:3000/uptest
 
 P.S. WebBox have a JavaScript module, which you can include to your webpage. Find out [here.](https://github.com/hypersasha/js-webbox)
+
+## Need more documentation?
+You can find the full list of WebBox classes and methods here.
 
