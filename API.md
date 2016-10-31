@@ -215,6 +215,32 @@ vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
 });
 ```
 
+###### Example of result object:
+```JavaScript
+{
+  response: {
+    fields: {
+      url: "http://localhost:3001/uploader.html"
+    },
+    files: [
+      0: {
+        name: "RW7B.jpg",
+        path: "mydrive/photos/RW7B.jpg",
+        save: true
+      },
+      1: {
+        errors: {
+          code: 413,
+          text: "Too large file."
+        },
+        saved: false
+      }
+    ]
+  },
+  status: 200
+}
+```
+
 ##### Avaliable properties
 | Name | Type | Description |
 | --- | --- | --- |
