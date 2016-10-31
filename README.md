@@ -7,7 +7,8 @@ Current version of WebBox is 0.0.9 (Alpha)
 ### Table of Contents
 - [Install](#installing)
 - [Run first server](#running-your-first-server)
-- [Handling requests](#handling-a-GET/POST-requests)
+- [Handling requests](#handling-a-getpost-requests)
+- [Creating a server root](#creating-a-server-root)
 
 ### Installing
 Add WebBox to your project with npm:
@@ -34,12 +35,12 @@ server.onPost('/test', function(req,res) {
 }
 ```
 
-## Create a server root
+## Creating a server root
 You also can set the root of your server.
 You also can set root of your server. Just make some folder in your project (./www, for example), add an **index.html** file with some markup and then modify your **index.js**
 ```JavaScript
 server.setServerRoot('www/');
 ```
-Done! Just go to localhost:3000/ and you'll see magic. :smile:
+Done! Just go to localhost:3000/ and you'll see a magic. :smile:
 
 
