@@ -18,7 +18,6 @@ There is a full list of all classes and methods, which WebBox includes.
 ### Class VirtualDrive
   - VirtualDrive.Box()
   - VirtualDrive.onUpload()
-  - VirtualDrive.onDownload()
 
 ## Server
 This class creates and setup your web-server.
@@ -94,3 +93,60 @@ server.onPost('/hello', function(req, res){
 });
 ```
 
+## Sql
+This class connects to MySQL database and allow you to stream queries (via mysql module).
+
+### Sql.Box()
+Constructor.
+
+###### Example:
+```JavaScript
+const web = require('webbox');
+var sql = new web.Sql.Box();
+```
+
+### Sql.connect(\<user>, \<pass>, \<database>, [host])
+Connects to MySQL-database on \<host> as \<user>.
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| user | String | User name. |
+| pass | String | User password. |
+| database | String | Database name. |
+| host | String | **OPTIONAL.** Database host (default: localhost) |
+
+###### Example:
+```JavaScript
+sql.connect('badkitten', 'kittenrulezz', 'kitdb');
+```
+
+### Sql.query(\<query>, [query_params], \<callback>)
+Sends MySQL-query to connected database.
+Returns (Object) result of query.
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| query | String | SQL-query. |
+| query_params | String | **OPTIONAL.** Parameters, which will be add to query (Read npm mysql documentation). |
+| callback | Function | Callback-function. Contains \<result> of query in arguments. |
+
+###### Example:
+```JavaScript
+server.onPost('/getUser', function(req, res) {
+  var query = "SELECT * FROM users WHERE ?";
+  var query_params = {
+    uid: 1337
+  };
+  
+  // Send SQL-query
+  sql.query(query, query_params, function(result){
+    server.sendJSON(result);
+  });
+});
+```
+
+###### Example of result:
+```JavaScript
+{"status":1,"rows":[{"id":1,"uid":1337,"name":"Alexander","lastname":"Witness","age":20}],"fields":[{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"id","orgName":"id","charsetNr":63,"length":2,"type":3,"flags":16899,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"uid","orgName":"uid","charsetNr":63,"length":6,"type":3,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"name","orgName":"name","charsetNr":33,"length":66,"type":253,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"lastname","orgName":"lastname","charsetNr":33,"length":66,"type":253,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true},{"catalog":"def","db":"webbed_test","table":"users","orgTable":"users","name":"age","orgName":"age","charsetNr":63,"length":2,"type":3,"flags":4097,"decimals":0,"zeroFill":false,"protocol41":true}]}
+```
+Don't panic. (: You can find more info [here.](https://github.com/mysqljs/mysql)
