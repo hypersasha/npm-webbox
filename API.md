@@ -202,6 +202,13 @@ Sets a listener for all upload events, which made via POST-request.
 | props | Object | Some settings for uploading files (see next). |
 | callback | Function | Your callback. Can pass 3 arguments \<req>(Request Object), \<res>(Response Object), \<result>(Result Object). |
 
+##### Avaliable properties
+| Name | Type | Description |
+| --- | --- | --- |
+| maxSize | Integer | Max file size in bytes. |
+| fileTypes | Array | Array of avaliable for upload MIME-types (you can find it [here](http://www.iana.org/assignments/media-types/media-types.xhtml)). |
+| maxNameLength | Integer | Max length of file name, which will be generated. |
+
 ###### Example:
 ```JavaScript
 var properties = {
@@ -240,12 +247,3 @@ vd.onUpload('/uptest', '/photos', properties, function(req, res, result){
   status: 200
 }
 ```
-
-##### Avaliable properties
-| Name | Type | Description |
-| --- | --- | --- |
-| maxSize | Integer | Max file size in bytes. |
-| fileTypes | Array | Array of avaliable for upload MIME-types (you can find it [here](http://www.iana.org/assignments/media-types/media-types.xhtml)). |
-| maxNameLength | Integer | Max length of file name, which will be generated. |
-
-
