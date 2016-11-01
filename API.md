@@ -17,7 +17,7 @@ There is a full list of all classes and methods, which WebBox includes.
   
 ### Class VirtualDrive
   - [VirtualDrive.Box()](#virtualdriveboxserver-root)
-  - [VirtualDrive.onUpload()](#virtualdriveonuploadurl-dir-props-callback)
+  - [VirtualDrive.onUpload()](#virtualdriveonuploadurl-dir-properties-callback)
 
 ## Server
 This class creates and setup your web-server.
@@ -192,14 +192,14 @@ const web = require('webbox');
 var vd = new web.VirtualDrive.Box(server, 'mydrive/');
 ```
 
-### VirtualDrive.onUpload(\<url>, \<dir>, \<props>, \<callback>)
+### VirtualDrive.onUpload(\<url>, \<dir>, \<properties>, \<callback>)
 Sets a listener for all upload events, which made via POST-request.
 
 | Argument | Type | Description |
 | --- | --- | --- |
 | url | String | Request url (for example, localhost:3000**/uploadFile** . |
 | dir | String | Where is your will be saved (at drive root). If dir folder doesn't exists, you'll get an error. |
-| props | Object | Some settings for uploading files (see next). |
+| properties | Object | Some settings for uploading files (see next). |
 | callback | Function | Your callback. Can pass 3 arguments \<req>(Request Object), \<res>(Response Object), \<result>(Result Object). |
 
 ##### Avaliable properties
