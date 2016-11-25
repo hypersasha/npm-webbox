@@ -1,6 +1,6 @@
 {
   "name": "webbox",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "description": "A simple platform which can help install ReactJS and Material-UI and setup your web-server.",
   "main": "index.js",
   "scripts": {
@@ -26,13 +26,12 @@
     "material-ui": "^0.15.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "react-tap-event-plugin": "^1.0.0"
-  },
-  "peerDependencies": {
+    "react-tap-event-plugin": "^1.0.0",
     "colors": "^1.1.2",
     "express": "^4.14.0",
     "body-parser": "^1.15.2"
   },
+  "peerDependencies": {},
   "readme": "ERROR: No README data found!",
   "_id": "webbox@0.0.4",
   "_shasum": "b6dd6c2b02ce35841d69afa7dac2f772173d370e",

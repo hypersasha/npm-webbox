@@ -6,7 +6,15 @@
 var colors, express, fs, pathmodule, bodyParser, multiparty;
 const logger = require('./Noty.js');
 var noty = new logger.Noty("all");
-function Box(server, root, config) {
+
+/**
+ * Constructor.
+ * @param server
+ * @param root
+ * @param config
+ * @constructor
+ */
+function Box(server, root) {
 
 	try {
 		if (server === undefined || root === undefined || typeof root !== "string"){
@@ -43,6 +51,10 @@ function Box(server, root, config) {
     }
 }
 
+/**
+ * Creates a new directory.
+ * @param path
+ */
 Box.mkDir = function (path) {
 	try {
     	fs.mkdirSync(path);
@@ -53,6 +65,11 @@ Box.mkDir = function (path) {
   	}
 }
 
+/**
+ * Check if directory at path exists
+ * @param path
+ * @returns {boolean}
+ */
 Box.dirExists = function (path) {
 	try {
 		var stats = fs.statSync(path);
@@ -67,6 +84,13 @@ Box.dirExists = function (path) {
 	}
 }
 
+/**
+ * Creates a new upload listener.
+ * @param url
+ * @param dir
+ * @param props
+ * @param callback
+ */
 Box.prototype.onUpload = function (url, dir, props, callback) {
 	var dest = pathmodule.join(this.driveRoot, dir);
 	var dir = pathmodule.join(this.root, dir);
@@ -136,10 +160,22 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
 	}
 }
 
+
+/**
+ * Get file extension from its name
+ * @param name
+ * @returns {T}
+ */
 Box.getFileExt = function( name ) {
 	return name.split('.').pop();
 }
 
+/**
+ * Generate name for new file
+ * @param length: max name length
+ * @param ext: file extension
+ * @returns {string} generated name
+ */
 Box.genName = function(length, ext) {
 	var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

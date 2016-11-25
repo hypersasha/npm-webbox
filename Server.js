@@ -8,7 +8,8 @@
 
 var colors, express, fs, pathmodule, bodyParser;
 const logger = require('./Noty.js');
-var noty = new logger.Noty("all");
+var noty = new logger.Noty("done");
+const https = require('https');
 
 /**
  * Constructor.
@@ -32,17 +33,38 @@ function Box() {
     this.module_path_abs = __dirname; // Get module path
     this.module_path = "/node_modules/webbox/";
     this.root = null;
+    this.escapePaths = {};
 }
 
 /**
  * Starts web-server on port = <srv_port>
  * @param srv_port (Int): Port of your server
  */
-Box.prototype.createServer = function(srv_port) {
+Box.prototype.createServer = function(srv_port, ssl) {
     this.port = srv_port;
 
     // Start listening port
-    this.app.listen(this.port);
+
+    if (ssl) { // start with SSL
+        if (!ssl.key) {
+            noty.log('Cannot find path to SSL key.', 'err');
+            return;
+        }
+        if (!ssl.cert) {
+            noty.log('Cannot find path to SSL certificate.', 'err');
+            return;
+        }
+
+        var privateKey = fs.readFileSync( ssl.key );
+        var certificate = fs.readFileSync( ssl.cert );
+
+        https.createServer({
+            key: privateKey,
+            cert: certificate
+        }, this.app).listen(this.port);
+    } else {
+        this.app.listen(this.port);
+    }
     noty.log('Server listening on port *:' + this.port, 'done');
 };
 
@@ -67,20 +89,28 @@ Box.prototype.setServerRoot = function(dir){
         var indexPath = pathmodule.join(fileAbsPath, 'index.html');
         this.app.get('/', function (req, res){
             res.sendFile(indexPath);
-            res.end();
         });
     } else {
         this.app.get('/', function (req, res){
             res.sendStatus(404);
-            res.end();
         });
     }
 
-    // Set all folders as resources (Recource method)
+    // Set all folders as resources (Recourse method)
     var regex = /(.+?)(\.[^.]*$|$)/;
+    var escape = this.escapePaths;
     this.app.get(regex, function (req, res) {
-        // console.log(req._parsedUrl.pathname); Get path name
         // console.log(req.query); GET Query Params
+        var pathname = req._parsedUrl.pathname; //Get url path name
+
+        // If user callback exists
+        if (escape[pathname] !== undefined &&
+            typeof escape[pathname] == "function") {
+            escape[pathname](req, res);
+            return;
+        }
+
+        // Else try to find page
         var pathname = decodeURI(req._parsedUrl.pathname);
         var checkFile = Box.fileExists(fileAbsPath, pathname);
         if (checkFile.fileExists) {
@@ -89,7 +119,7 @@ Box.prototype.setServerRoot = function(dir){
             res.sendStatus(checkFile.status);
         }
     });
-}
+};
 
 /**
  * Check file existing.
@@ -106,7 +136,7 @@ Box.fileExists = function (path, filename) {
     var result = {
         fileExists: false,
         status: 404
-    }
+    };
     try {
         var stats = fs.statSync(path);
         if (stats !== undefined) {
@@ -134,7 +164,7 @@ Box.fileExists = function (path, filename) {
     if (!result.fileExists)
         noty.log('GET: ' + path + " ERROR", 'warn');
     return result;
-}
+};
 
 /**
  * Makes all files in dir as downloadable.
@@ -147,9 +177,10 @@ Box.prototype.newDownloadFolder = function (dir) {
         res.sendFile(pth);
     });
     noty.log('New download folder: ' + dir, 'done');
-}
+};
 
 /**
+ * TODO: DEPRECATED!
  * Creates a new GET/POST request listener with user-function.
  * @param req_path
  * @param method
@@ -166,7 +197,7 @@ Box.prototype.newRequestListener = function(req_path, method, callback) {
             callback(req, res);
         });
     }
-}
+};
 
 /**
  * Creates a new POST request listener.
@@ -177,23 +208,16 @@ Box.prototype.onPost = function(path, callback) {
     this.app.post(path, function(req,res) {
         callback(req, res);
     });
-}
+};
 
 /**
- * Creates a new request listener with static page.
- * @param req_path
- * @param page_path
+ * Creates a new GET-request listener.
+ * @param path
+ * @param callback
  */
-Box.prototype.newStaticPage = function (req_path, page_path) {
-    var abs_path = this.path + '/';
-
-    this.app.get(req_path, function (req, res, next) {
-        var pth = abs_path + page_path;
-        res.sendFile(pth);
-        res.end();
-    });
-    noty.log('New static page: ' + page_path, 'done');
-}
+Box.prototype.onGet = function(path, callback) {
+    this.escapePaths[path] = callback;
+};
 
 /**
  * Send response as JSON-object.
@@ -207,7 +231,7 @@ Box.prototype.sendJSON = function (res, json_obj, status) {
     }
     res.status(status).json(json_obj);
     res.end();
-}
+};
 
 /**
  * Redirect user to <path>.
@@ -216,7 +240,7 @@ Box.prototype.sendJSON = function (res, json_obj, status) {
  */
 Box.prototype.redirectLink = function(res, path) {
     res.redirect(path);
-}
+};
 
 /**
  * Loads an example of using Material-UI with ReactJS.
@@ -224,6 +248,6 @@ Box.prototype.redirectLink = function(res, path) {
 Box.prototype.helloWorld = function() {
     var dir = pathmodule.join(this.module_path, '/example');
     this.setServerRoot(dir);
-}
+};
 
 exports.Box=Box;

@@ -28,11 +28,11 @@ Noty.prototype.log = function (text, type) {
                 console.log(this.prefix + " " + colors.green(text));
             break;
         case "warn":
-            if (this.active == "all" || this.active == "done")
+            if (this.active == "all")
                 console.log(this.prefix + " " + colors.gray(text));
             break;
         case "err":
-            if (this.active == "all" || this.active == "done")
+            if (this.active == "all" || this.active == "err")
                 console.log(this.prefix + " " + colors.red(text));
             break;
         case "info":
@@ -43,6 +43,6 @@ Noty.prototype.log = function (text, type) {
             if (this.active == "all")
                 console.log(this.prefix + " " + text);
     }
-}
+};
 
 exports.Noty = Noty;
