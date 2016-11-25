@@ -31,7 +31,7 @@ const web = require('webbox');
 var server = new web.Server.Box();
 ```
 
-### Server.createServer(\<port>)
+### Server.createServer(\<port>, \[ssl])
 Starts server at port from arguments.
 
 | Argument | Type | Description |
