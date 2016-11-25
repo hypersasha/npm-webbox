@@ -3,7 +3,7 @@
 NPM module, which can help you to setup your first NodeJS server, based on Express, MySQL and Multiparty modules.
 
 ### Version
-Current version of WebBox is 0.0.9 (Alpha)
+Current version of WebBox is 0.0.13 (Alpha)
 
 ### Table of Contents
 - [Installing](#installing)
