@@ -37,10 +37,20 @@ Starts server at port from arguments.
 | Argument | Type | Description |
 | --- | --- | --- |
 | port | Integer | At which port your server should starts. |
+| ssl | Object | **OPTIONAL.** SSL config object. | 
 
-###### Example:
+###### Example 1:
 ```JavaScript
 server.createServer(3000);
+```
+
+###### Example 2:
+```JavaScript
+var ssl = { 
+  key: '/usr/local/apache/conf/domain.key',
+  cert: '/usr/local/apache/conf/2_domain.ru.crt'
+}
+server.createServer(3000, ssl); // Starts server with SSL
 ```
 
 ### Server.setServerRoot(\<dir>)
