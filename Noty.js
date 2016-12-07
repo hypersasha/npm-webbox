@@ -36,7 +36,7 @@ Noty.prototype.log = function (text, type) {
                 console.log(this.prefix + " " + colors.red(text));
             break;
         case "info":
-            if (this.active == "all")
+            if (this.active == "all" || this.active == "done")
                 console.log(this.prefix + " " + colors.cyan(text));
             break;
         default:

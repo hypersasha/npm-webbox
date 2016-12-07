@@ -38,7 +38,7 @@ function Box(server, root) {
     this.driveRoot = root;
 
     if (this.server.root != null && this.server.root !== undefined) {
-    	this.root = pathmodule.join(this.server.root, root);
+    	this.root = pathmodule.join(this.server.path, this.server.root, root);
     	noty.log('Starting VirtualDrive at: ' + this.root, 'info');
 
     	if (!Box.dirExists(this.root)) {
@@ -130,7 +130,7 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
 
 				var len = (props.maxNameLength !== undefined && typeof props.maxNameLength == "number" ? props.maxNameLength : 12);
 				var ext = Box.getFileExt(file.originalFilename);
-				var fileName = Box.genName(len, ext);
+				var fileName = (!props.saveName ? Box.genName(len, ext) : file.originalFilename);
 				var filePath = pathmodule.join(dir, fileName);
 
 				// Save file to dir
