@@ -8,7 +8,7 @@ Current version of WebBox is 0.0.15 (Alpha)
 ### Table of Contents
 - [Installing](#installing)
 - [Running first server](#running-your-first-server)
-- [Handling requests](#handling-a-getpost-requests)
+- [Handling requests](#handling-getpost-requests)
 - [Creating a server root](#creating-a-server-root)
 - [Allow files uploads](#allow-files-uploads)
 - [More Documentation](#need-more-documentation)
