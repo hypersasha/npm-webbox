@@ -1,6 +1,6 @@
 {
   "name": "webbox",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "A simple platform which can help install ReactJS and Material-UI and setup your web-server.",
   "main": "index.js",
   "scripts": {

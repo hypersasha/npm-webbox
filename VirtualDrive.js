@@ -106,6 +106,11 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
 				result.fields = JSON.parse(value);
 			});
 
+			form.on('error', function (e) {
+				callback(req, res, {upload_error: true});
+				return;
+			});
+
 			form.on('file', function(name, file){
 				var finfo = {};
 
