@@ -80,25 +80,32 @@ Box.prototype.setServerRoot = function(dir){
         return;
     }
 
+    if (this.escape.length == 0) {
+        noty.log('No escape paths was declared! Be sure, you put setServerRoot after all POST/GET handlers.', 'warn');
+    }
+
     var fileAbsPath = pathmodule.join(this.path, dir);
     this.root = dir;
+    var escape = this.escapePaths;
 
     // Chek for existing index.html file
     var checkIndex = Box.fileExists(fileAbsPath, 'index.html');
-    if (checkIndex.fileExists) {
-        var indexPath = pathmodule.join(fileAbsPath, 'index.html');
-        this.app.get('/', function (req, res){
-            res.sendFile(indexPath);
-        });
-    } else {
-        this.app.get('/', function (req, res){
-            res.sendStatus(404);
-        });
+
+    if (escape['/'] === undefined && escape['/index.html'] === undefined) {
+        if (checkIndex.fileExists) {
+            var indexPath = pathmodule.join(fileAbsPath, 'index.html');
+            this.app.get('/', function (req, res){
+                res.sendFile(indexPath);
+            });
+        } else {
+            this.app.get('/', function (req, res){
+                res.sendStatus(404);
+            });
+        }
     }
 
     // Set all folders as resources (Recourse method)
     var regex = /(.+?)(\.[^.]*$|$)/;
-    var escape = this.escapePaths;
     this.app.get(regex, function (req, res) {
         // console.log(req.query); GET Query Params
         var pathname = req._parsedUrl.pathname; //Get url path name
