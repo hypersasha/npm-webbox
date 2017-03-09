@@ -80,13 +80,13 @@ Box.prototype.setServerRoot = function(dir){
         return;
     }
 
-    if (this.escape.length == 0) {
-        noty.log('No escape paths was declared! Be sure, you put setServerRoot after all POST/GET handlers.', 'warn');
+    var escape = this.escapePaths;
+    if (this.isNoEscapes()) {
+        noty.log('No escape paths was declared! Be sure, you put setServerRoot after all POST/GET handlers.', 'info');
     }
 
     var fileAbsPath = pathmodule.join(this.path, dir);
     this.root = dir;
-    var escape = this.escapePaths;
 
     // Chek for existing index.html file
     var checkIndex = Box.fileExists(fileAbsPath, 'index.html');
@@ -255,6 +255,16 @@ Box.prototype.redirectLink = function(res, path) {
 Box.prototype.helloWorld = function() {
     var dir = pathmodule.join(this.module_path, '/example');
     this.setServerRoot(dir);
+};
+
+Box.prototype.isNoEscapes = function () {
+    var obj = this.escapePaths;
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return JSON.stringify(obj) === JSON.stringify({});
 };
 
 exports.Box=Box;
