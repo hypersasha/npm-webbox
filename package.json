@@ -1,32 +1,15 @@
 {
   "name": "webbox",
-  "version": "0.0.17",
-  "description": "A simple platform which can help install ReactJS and Material-UI and setup your web-server.",
+  "version": "0.0.18",
+  "description": "A simple platform which can help you setup your first web-server.",
   "main": "index.js",
-  "scripts": {
-    "superbox": "webpack --config webpack-dev-server.config.js --progress --inline --colors",
-    "superboxdev": "webpack-dev-server --config superbox-dev-server.config.js --progress --inline --colors"
-  },
+  "scripts": {},
   "author": {
     "name": "star.cat"
   },
   "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.3.26",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
-    "html-webpack-plugin": "^2.7.2",
-    "react-hot-loader": "^1.3.0",
-    "transfer-webpack-plugin": "^0.1.4",
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "material-ui": "^0.15.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-tap-event-plugin": "^1.0.0",
     "colors": "^1.1.2",
     "express": "^4.14.0",
     "body-parser": "^1.15.2"
