@@ -1,6 +1,6 @@
 {
   "name": "webbox",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A simple platform which can help you setup your first web-server.",
   "main": "index.js",
   "scripts": {},
