@@ -63,7 +63,7 @@ Box.mkDir = function (path) {
     		noty.log('Directory ' + path + ' already exists!','err');
     	}
   	}
-}
+};
 
 /**
  * Check if directory at path exists
@@ -82,7 +82,7 @@ Box.dirExists = function (path) {
 		if (e.code != 'ENOENT')
 			console.log(e);
 	}
-}
+};
 
 /**
  * Creates a new upload listener.
@@ -142,19 +142,22 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
 				var ws = fs.createWriteStream(filePath);
 				ws.on('close', function(){
 					fs.unlink(file.path); // remove tmp-file from multiparty
+
+                    // Push finfo
+                    finfo.saved = true;
+                    finfo.name = fileName;
+                    finfo.path = pathmodule.join(dest, fileName);
+                    result.files.push(finfo);
+
+                    // Send response on fileUpload
+                    callback(req, res, result);
 				});
 				fs.createReadStream(file.path).pipe(ws);
-
-				// Push finfo
-				finfo.saved = true;
-				finfo.name = fileName;
-				finfo.path = pathmodule.join(dest, fileName);
-				result.files.push(finfo);
 			});
 
-			form.on('close', function(data){
+			/*form.on('close', function(data){
 				callback(req, res, result);
-			});
+			});*/
 
 			form.parse(req);
 		});
@@ -163,7 +166,7 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
 		text += '\nAll files, which uploads on ' + url + ' will be ignored! Fix it.';
 		noty.log(text, 'err');
 	}
-}
+};
 
 
 /**
@@ -173,7 +176,7 @@ Box.prototype.onUpload = function (url, dir, props, callback) {
  */
 Box.getFileExt = function( name ) {
 	return name.split('.').pop();
-}
+};
 
 /**
  * Generate name for new file
@@ -192,6 +195,6 @@ Box.genName = function(length, ext) {
     	text += "."+ext;
     }
     return text;
-}
+};
 
 exports.Box=Box;
